@@ -17,6 +17,12 @@
 - 公开页：`created/skills/super-background/README.md`
 - 关键词：`super background`、`超级背调`、`客户背调`、`Customer Due Diligence`、`B2B Recon`
 
+### Prompt Collections
+
+- [`target-cursor-landing`](collected/prompts/target-cursor-landing/): 暗色作品集首页 prompt，适合学习 GSAP、Framer Motion、HLS 视频 Hero 和 Bento Grid。
+- [`evil-eye-background`](collected/prompts/evil-eye-background/): React Bits EvilEye WebGL 背景组件集成 prompt。
+- [`quietpress-cosmic-hero`](collected/prompts/quietpress-cosmic-hero/): 音乐品牌单屏 Hero prompt，包含视频背景、liquid glass 和播放组件。
+
 ## Repository Structure
 
 - `collected/`: 收藏的 Skill 或提示词。
