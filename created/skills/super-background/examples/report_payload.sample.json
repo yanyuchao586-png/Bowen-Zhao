@@ -1,0 +1,52 @@
+{
+  "title": "客户超级背调报告",
+  "subtitle": "Customer Background Check Report",
+  "subject": "Example Company",
+  "file_stem": "example-company",
+  "summary_rows": [
+    ["背调对象", "Example Company"],
+    ["官网", "https://example.com"],
+    ["结论", "示例 payload，仅用于验证 Word 报告生成流程。"]
+  ],
+  "intro_paragraphs": [
+    "本示例用于演示 build_report.py 需要的 JSON 结构。真实背调时，所有字段都应来自已验证来源；未找到的信息统一写「暂未找到」。"
+  ],
+  "key_points": [
+    "保留来源链接和验证状态。",
+    "决策人、邮箱、社媒账号不得猜测。",
+    "输出前检查是否包含 API key、token 或内部路径。"
+  ],
+  "sections": [
+    {
+      "heading": "一、背调摘要",
+      "paragraphs": [
+        "这是示例章节。真实报告中应填写客户层级、业务类型、主要市场、风险信号和跟进建议。"
+      ]
+    },
+    {
+      "heading": "二、全息档案（10 维）",
+      "tables": [
+        {
+          "title": "第①维 · 客户类型定位",
+          "rows": [
+            ["客户层级", "暂未找到"],
+            ["客户类型", "暂未找到"],
+            ["主要市场", "暂未找到"]
+          ]
+        },
+        {
+          "title": "第⑥维 · 决策人图谱",
+          "rows": [
+            ["决策人", "暂未找到"],
+            ["职位", "暂未找到"],
+            ["邮箱", "暂未找到"]
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    ["官网", "https://example.com"]
+  ],
+  "disclaimer": "本报告为示例文件，不构成商业、法律或投资建议。"
+}

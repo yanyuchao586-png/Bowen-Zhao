@@ -1,0 +1,4 @@
+interface:
+  display_name: "super background"
+  short_description: "Run a 10-dimension customer background check and generate a template report"
+  default_prompt: "Use $super-background to research a company or website, then output a verified customer background report in chat or as a template Word/PDF file."

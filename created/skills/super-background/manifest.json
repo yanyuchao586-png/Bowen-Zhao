@@ -1,0 +1,130 @@
+{
+  "name": "super-background",
+  "display_name": "super background",
+  "version": "4.5.0",
+  "build_date": "2026-05-09",
+  "framework": "skill-writer-pro v3.0",
+  "brand": {
+    "name": "小蜂学掌",
+    "name_en": "BEE-EDUCATION",
+    "website": "www.xfxz123.com",
+    "copyright": "© Bowen Zhao and contributors. Released under the MIT License."
+  },
+  "license": "MIT",
+  "description": "10 维全息客户背调引擎 v4.5（小蜂学掌定制版）。首次使用会询问并记录快速/深度与文字/Word 偏好；仅在 Word 文档模式下自动检查/补齐 Python 运行环境，支持内置模板报告生成，触发词：super background/超级背调/背调/客户背调/深度背调/客户尽调/Background Check/Customer Due Diligence/B2B Recon",
+  "trigger_keywords": [
+    "超级背调",
+    "背调",
+    "客户背调",
+    "深度背调",
+    "客户尽调",
+    "Background Check",
+    "Customer Due Diligence",
+    "B2B Recon",
+    "客户调查"
+  ],
+  "trigger_command": "#超级背调 [公司名 OR 官网URL]",
+  "input_schema": {
+    "company_name_or_url": "string (required) - 公司英文名或官网URL，二选一即可"
+  },
+  "output_artifacts": [
+    {
+      "type": "docx",
+      "path_template": "outputs/{company_short}_{date_str}/客户超级背调报告_{company_short}_{date_str}.docx",
+      "renderer": "scripts/build_report.py",
+      "template": "assets/customer-background-report-template.docx",
+      "validator": null,
+      "sections": [
+        "封面 / 基本信息 / 背调结论",
+        "公司背景与注册信息",
+        "业务模式与销售平台",
+        "买家标签与买家特征",
+        "近90天站内行为",
+        "最常采购行业与最近询盘产品",
+        "数据来源与免责声明"
+      ]
+    },
+    {
+      "type": "chat_markdown",
+      "template": "SKILL.md#step-3-output"
+    }
+  ],
+  "dimensions": [
+    "客户类型定位",
+    "公司基本情报",
+    "实力规模",
+    "产品业务模式",
+    "贸易海关数据",
+    "决策人图谱(≥5位)",
+    "社交媒体资产",
+    "风险评估",
+    "跟进决策+5套话术+中英开发信",
+    "进出口贸易数据 (v2.5 新增 - 年度总进口/总销售/进口占销比/分国家进口明细 ≥3 国)"
+  ],
+  "data_sources": [
+    "官网",
+    "LinkedIn",
+    "Apollo",
+    "Hunter.io",
+    "Crunchbase",
+    "Panjiva",
+    "ImportYeti",
+    "52WMB",
+    "ZoomInfo",
+    "Bloomberg / D&B（年度销售额）",
+    "Facebook/Instagram/YouTube/TikTok"
+  ],
+  "validation_redlines": [
+    "R0 (最高优先级): 所有 URL 必须存在于 data_sources 中（即 web_fetch 实测过），任何字段引用未实测 URL 直接拦截；统一占位术语为「暂未找到」，禁用旧变体",
+    "R1: 决策人 < 5 位 → 重新挖掘",
+    "R2: 任一维度字段为空 → 重发 web_search",
+    "R3: risk_score 不在 0-100 → 强制重算",
+    "R4: dim9_decision 不是三选一 → 强制三选一",
+    "R5: dim9_pitches != 5 套 → 重生成至 5",
+    "R6: WhatsApp 非 E.164 / 伪造号段 → 改为「暂未找到」",
+    "R14: LinkedIn 不符 /in/ 格式或猜测式 slug → 改为「暂未找到」",
+    "R15: 邮箱无 (已验证)/(推测,未验证) 标注 → 报错",
+    "R16: 社媒 URL 不符合官方域名白名单 → 改为「暂未找到」",
+    "R17: 字段含 example.com / lorem / xxx 占位 → 整字段降级「暂未找到」",
+    "R18 (v2.5 新增): dim10_trade.import_breakdown < 3 国家 → 重新查 Panjiva/ImportYeti，凑满 3 个最大来源国"
+  ],
+  "quality_rules": {
+    "unknown_value": "暂未找到",
+    "anti_lazy_blacklist": [
+      "尊敬的客户，感谢您的咨询",
+      "Dear customer, thank you for your inquiry",
+      "待补充",
+      "TBD",
+      "N/A（默认）",
+      "示例内容",
+      "lorem ipsum"
+    ],
+    "placeholder_blacklist": [
+      "未公开",
+      "未披露",
+      "TBD",
+      "N/A",
+      "待补充",
+      "示例",
+      "USD 0"
+    ]
+  },
+  "references": [
+    "references/email-verification-guide.md (R15 配套：Hunter.io 25 次/月 + Apollo.io 60 次/月 邮箱验证操作手册)",
+    "references/report-template-map.md (Word 模板字段映射与 JSON 输出约定)"
+  ],
+  "dependencies": {
+    "python": ">=3.10",
+    "packages": [
+      "python-docx>=1.1.2"
+    ]
+  },
+  "changelog": {
+    "v4.5.0": "新增首次使用偏好确认：快速回复/深度回复 + 纯文字/Word 文档；将 Python bootstrap 收敛到 Word 文档模式，避免纯聊天场景的额外等待。",
+    "v4.4.0": "新增首次使用自动 bootstrap Python 运行环境；支持检查、补齐并缓存 Python + python-docx，后续通过 runtime 标记跳过重复安装。",
+    "v4.3.0": "新增内置 Word 模板与 build_report.py 导出流程；默认使用 assets/customer-background-report-template.docx 生成客户背调报告，减少用户重复提供模板和中文字体乱码风险。",
+    "v3.0.0": "小蜂学掌品牌全渗透：⓪封面Sheet（LOGO/官网/日期）+ 全5内容Sheet品牌表头/表尾（小蜂学掌|BEE-EDUCATION|www.xfxz123.com）+ 文件名「小蜂学掌_」前缀 + Step1触发范式ASCII品牌头 + 实时10维进度播报对话框 + sanity_check S02=6/S09品牌正则/S11≥41行",
+    "v2.5.0": "新增第 10 维进出口贸易数据：Sheet ① 顶部贸易体量速览 4 列卡片（含进口占销比红/黄/绿条件填充） + Sheet ② 末尾第 10 维章节（顶部 3 行汇总 + 分国家进口明细 ≥3 国 × 5 列）+ sanity_check 升至 17 项（S14-S17 拦截贸易数据缺失）+ schema 强制 dim10_trade 7 字段 + 占位词黑名单升级",
+    "v2.4.0": "极致重构：砍 Word 改单 Excel 5 Sheet + 反 Auto 偷懒 sanity_check 13 项硬断言 + excel_gen 全链路 fail-fast"
+  }
+}

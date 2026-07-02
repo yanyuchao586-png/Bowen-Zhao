@@ -8,3 +8,9 @@ secrets/
 private/
 credentials.*
 token.*
+outputs/
+runtime/
+__pycache__/
+*.pyc
+created/skills/**/outputs/
+created/skills/**/runtime/
