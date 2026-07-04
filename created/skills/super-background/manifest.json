@@ -1,17 +1,17 @@
 {
   "name": "super-background",
   "display_name": "super background",
-  "version": "4.5.0",
+  "version": "4.7.0",
   "build_date": "2026-05-09",
   "framework": "skill-writer-pro v3.0",
   "brand": {
-    "name": "小蜂学掌",
-    "name_en": "BEE-EDUCATION",
-    "website": "www.xfxz123.com",
+    "name": "Bowen",
+    "name_en": "Bowen",
+    "website": "",
     "copyright": "© Bowen Zhao and contributors. Released under the MIT License."
   },
   "license": "MIT",
-  "description": "10 维全息客户背调引擎 v4.5（小蜂学掌定制版）。首次使用会询问并记录快速/深度与文字/Word 偏好；仅在 Word 文档模式下自动检查/补齐 Python 运行环境，支持内置模板报告生成，触发词：super background/超级背调/背调/客户背调/深度背调/客户尽调/Background Check/Customer Due Diligence/B2B Recon",
+  "description": "10 维全息客户背调引擎 v4.7（Bowen定制版）。首次使用会询问并记录快速/深度与文字/Word 偏好；Word 文档模式严格按内置 BULK 模板章节骨架、Heading 1/Heading 2/List Paragraph 样式和表格风格生成，并增强 UTF-8/中文文件名/中文字体防护。触发词：super background/超级背调/背调/客户背调/深度背调/客户尽调/Background Check/Customer Due Diligence/B2B Recon",
   "trigger_keywords": [
     "超级背调",
     "背调",
@@ -120,11 +120,13 @@
     ]
   },
   "changelog": {
+    "v4.7.0": "强化 Word 模板一致性：build_report.py 显式使用模板 Heading 1 / Heading 2 / List Paragraph 样式，并复用模板首表表格属性；文档模式要求按 BULK 模板固定章节骨架组织 JSON。",
+    "v4.6.0": "增强 Word 文档编码防护：UTF-8 BOM 输入、ASCII 默认文件名、中文目标文件名临时写入再重命名、ASCII-safe JSON 输出、输入连续问号拦截与生成后 XML 编码检查。",
     "v4.5.0": "新增首次使用偏好确认：快速回复/深度回复 + 纯文字/Word 文档；将 Python bootstrap 收敛到 Word 文档模式，避免纯聊天场景的额外等待。",
     "v4.4.0": "新增首次使用自动 bootstrap Python 运行环境；支持检查、补齐并缓存 Python + python-docx，后续通过 runtime 标记跳过重复安装。",
     "v4.3.0": "新增内置 Word 模板与 build_report.py 导出流程；默认使用 assets/customer-background-report-template.docx 生成客户背调报告，减少用户重复提供模板和中文字体乱码风险。",
-    "v3.0.0": "小蜂学掌品牌全渗透：⓪封面Sheet（LOGO/官网/日期）+ 全5内容Sheet品牌表头/表尾（小蜂学掌|BEE-EDUCATION|www.xfxz123.com）+ 文件名「小蜂学掌_」前缀 + Step1触发范式ASCII品牌头 + 实时10维进度播报对话框 + sanity_check S02=6/S09品牌正则/S11≥41行",
-    "v2.5.0": "新增第 10 维进出口贸易数据：Sheet ① 顶部贸易体量速览 4 列卡片（含进口占销比红/黄/绿条件填充） + Sheet ② 末尾第 10 维章节（顶部 3 行汇总 + 分国家进口明细 ≥3 国 × 5 列）+ sanity_check 升至 17 项（S14-S17 拦截贸易数据缺失）+ schema 强制 dim10_trade 7 字段 + 占位词黑名单升级",
-    "v2.4.0": "极致重构：砍 Word 改单 Excel 5 Sheet + 反 Auto 偷懒 sanity_check 13 项硬断言 + excel_gen 全链路 fail-fast"
+    "v3.0.0": "旧版品牌封面与实时进度对话框。",
+    "v2.5.0": "新增第 10 维进出口贸易数据。",
+    "v2.4.0": "旧版 Excel 流程，现已废弃。"
   }
 }

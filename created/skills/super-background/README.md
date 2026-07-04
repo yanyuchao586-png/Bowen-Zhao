@@ -1,11 +1,11 @@
 ﻿# super-background
 
-![Version](https://img.shields.io/badge/version-4.5.0-blue)
+![Version](https://img.shields.io/badge/version-4.7.0-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![Output](https://img.shields.io/badge/output-chat%20%2B%20docx-orange)
 
-`super-background` 是一个 10 维客户背调 Skill。它面向 B2B 客户开发、外贸销售、客户尽调和销售线索研究场景，从公司名、官网 URL 或截图线索出发，输出客户全息档案、决策人图谱，并可按内置 Word 模板生成报告。
-`super-background` is a 10-dimension customer background research skill for B2B sales, customer due diligence, lead qualification, decision-maker mapping, and Word report generation.
+`super-background` 是一个 10 维客户背调 Skill。它面向 B2B 客户开发、外贸销售、客户尽调和销售线索研究场景，从公司名、官网 URL 或截图线索出发，输出客户全息档案、决策人图谱，并可按内置 Word/BULK 模板生成报告。
+`super-background` is a 10-dimension customer background research skill for B2B sales, customer due diligence, lead qualification, decision-maker mapping, and Word/BULK-template report generation.
 
 核心原则很简单：禁止编造，禁止推测，找不到就写「暂未找到」。
 Core rule: no fabrication, no unsupported guessing, and use `暂未找到` when reliable evidence cannot be found.
@@ -22,6 +22,10 @@ Core rule: no fabrication, no unsupported guessing, and use `暂未找到` when 
   Source discipline: URLs must be checked, and social links must point to actual profile pages.
 - 文档模式按需补齐 Python 和 `python-docx`，纯文字模式不强制依赖本地环境。
   Python and `python-docx` are only needed for Word document generation.
+- v4.7 强化 Word 模板一致性：显式使用模板 `Heading 1`、`Heading 2`、`List Paragraph` 样式，并复用模板表格属性。
+  v4.7 improves Word template fidelity by using template `Heading 1`, `Heading 2`, `List Paragraph` styles, and template table properties.
+- v4.6+ 加强编码防护：支持 UTF-8 BOM 输入、ASCII 默认文件名、中文目标文件名安全重命名、ASCII-safe JSON 输出和乱码预警。
+  v4.6+ adds encoding safeguards for UTF-8 BOM input, ASCII-safe default filenames, safe Chinese filename renaming, ASCII-safe JSON output, and mojibake checks.
 
 ## Quick Start / 快速开始
 
@@ -46,6 +50,9 @@ python .\scripts\build_report.py --input .\examples\report_payload.sample.json
 
 默认输出到当前 skill 目录下的 `outputs/`。
 The default output folder is `outputs/` inside this skill directory.
+
+脚本默认以 JSON 输出生成路径和 warnings，适合自动化工具读取。
+The script prints JSON by default, including the output path and warnings for automation-friendly usage.
 
 ## Install / 安装
 
